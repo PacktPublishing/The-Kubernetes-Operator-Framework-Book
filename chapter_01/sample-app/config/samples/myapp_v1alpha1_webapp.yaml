@@ -1,0 +1,6 @@
+apiVersion: myapp.myseite.com/v1alpha1
+kind: WebApp
+metadata:
+  name: webapp-sample
+spec:
+  # TODO(user): Add fields here

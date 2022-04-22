@@ -1,0 +1,24 @@
+# permissions for end users to edit webapps.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: webapp-editor-role
+rules:
+- apiGroups:
+  - myapp.myseite.com
+  resources:
+  - webapps
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - myapp.myseite.com
+  resources:
+  - webapps/status
+  verbs:
+  - get
