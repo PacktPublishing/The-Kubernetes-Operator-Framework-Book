@@ -1,0 +1,5 @@
+## Append samples you want in your CSV to this file as resources ##
+resources:
+- operator_v1alpha1_nginxoperator.yaml
+- operator_v1alpha2_nginxoperator.yaml
+#+kubebuilder:scaffold:manifestskustomizesamples

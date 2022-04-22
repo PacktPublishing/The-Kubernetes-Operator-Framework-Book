@@ -1,0 +1,247 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: ClusterServiceVersion
+metadata:
+  annotations:
+    alm-examples: |-
+      [
+        {
+          "apiVersion": "operator.example.com/v1alpha1",
+          "kind": "NginxOperator",
+          "metadata": {
+            "name": "nginxoperator-sample"
+          },
+          "spec": null
+        },
+        {
+          "apiVersion": "operator.example.com/v1alpha2",
+          "kind": "NginxOperator",
+          "metadata": {
+            "name": "nginxoperator-sample"
+          },
+          "spec": null
+        }
+      ]
+    capabilities: Basic Install
+    operators.operatorframework.io/builder: operator-sdk-v1.17.0
+    operators.operatorframework.io/project_layout: go.kubebuilder.io/v3
+  name: nginx-operator.v0.0.2
+  namespace: placeholder
+spec:
+  apiservicedefinitions: {}
+  customresourcedefinitions:
+    owned:
+    - description: NginxOperator is the Schema for the nginxoperators API
+      displayName: Nginx Operator
+      kind: NginxOperator
+      name: nginxoperators.operator.example.com
+      version: v1alpha1
+    - description: NginxOperator is the Schema for the nginxoperators API
+      displayName: Nginx Operator
+      kind: NginxOperator
+      name: nginxoperators.operator.example.com
+      version: v1alpha2
+  description: Operator for managing a basic Nginx deployment
+  displayName: Nginx Operator
+  icon:
+  - base64data: ""
+    mediatype: ""
+  install:
+    spec:
+      clusterPermissions:
+      - rules:
+        - apiGroups:
+          - apps
+          resources:
+          - deployments
+          verbs:
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
+        - apiGroups:
+          - operator.example.com
+          resources:
+          - nginxoperators
+          verbs:
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
+        - apiGroups:
+          - operator.example.com
+          resources:
+          - nginxoperators/finalizers
+          verbs:
+          - update
+        - apiGroups:
+          - operator.example.com
+          resources:
+          - nginxoperators/status
+          verbs:
+          - get
+          - patch
+          - update
+        - apiGroups:
+          - authentication.k8s.io
+          resources:
+          - tokenreviews
+          verbs:
+          - create
+        - apiGroups:
+          - authorization.k8s.io
+          resources:
+          - subjectaccessreviews
+          verbs:
+          - create
+        serviceAccountName: nginx-operator-controller-manager
+      deployments:
+      - name: nginx-operator-controller-manager
+        spec:
+          replicas: 1
+          selector:
+            matchLabels:
+              control-plane: controller-manager
+          strategy: {}
+          template:
+            metadata:
+              labels:
+                control-plane: controller-manager
+            spec:
+              containers:
+              - args:
+                - --secure-listen-address=0.0.0.0:8443
+                - --upstream=http://127.0.0.1:8080/
+                - --logtostderr=true
+                - --v=10
+                image: gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
+                name: kube-rbac-proxy
+                ports:
+                - containerPort: 8443
+                  name: https
+                  protocol: TCP
+                resources: {}
+              - args:
+                - --health-probe-bind-address=:8081
+                - --metrics-bind-address=127.0.0.1:8080
+                - --leader-elect
+                command:
+                - /manager
+                image: docker.io/mdame/nginx-operator:v0.0.2
+                livenessProbe:
+                  httpGet:
+                    path: /healthz
+                    port: 8081
+                  initialDelaySeconds: 15
+                  periodSeconds: 20
+                name: manager
+                ports:
+                - containerPort: 9443
+                  name: webhook-server
+                  protocol: TCP
+                readinessProbe:
+                  httpGet:
+                    path: /readyz
+                    port: 8081
+                  initialDelaySeconds: 5
+                  periodSeconds: 10
+                resources:
+                  limits:
+                    cpu: 200m
+                    memory: 100Mi
+                  requests:
+                    cpu: 100m
+                    memory: 20Mi
+                securityContext:
+                  allowPrivilegeEscalation: false
+                volumeMounts:
+                - mountPath: /tmp/k8s-webhook-server/serving-certs
+                  name: cert
+                  readOnly: true
+              securityContext:
+                runAsNonRoot: true
+              serviceAccountName: nginx-operator-controller-manager
+              terminationGracePeriodSeconds: 10
+              volumes:
+              - name: cert
+                secret:
+                  defaultMode: 420
+                  secretName: webhook-server-cert
+      permissions:
+      - rules:
+        - apiGroups:
+          - ""
+          resources:
+          - configmaps
+          verbs:
+          - get
+          - list
+          - watch
+          - create
+          - update
+          - patch
+          - delete
+        - apiGroups:
+          - coordination.k8s.io
+          resources:
+          - leases
+          verbs:
+          - get
+          - list
+          - watch
+          - create
+          - update
+          - patch
+          - delete
+        - apiGroups:
+          - ""
+          resources:
+          - events
+          verbs:
+          - create
+          - patch
+        serviceAccountName: nginx-operator-controller-manager
+    strategy: deployment
+  installModes:
+  - supported: false
+    type: OwnNamespace
+  - supported: false
+    type: SingleNamespace
+  - supported: false
+    type: MultiNamespace
+  - supported: true
+    type: AllNamespaces
+  keywords:
+  - nginx
+  - tutorial
+  links:
+  - name: Nginx Operator
+    url: https://nginx-operator.domain
+  maintainers:
+  - email: mike@mycompany.example
+    name: Mike Dame
+  maturity: alpha
+  provider:
+    name: MyCompany
+    url: http://mycompany.example
+  replaces: nginx-operator.v0.0.1
+  version: 0.0.2
+  webhookdefinitions:
+  - admissionReviewVersions:
+    - v1
+    - v1alpha1
+    - v1alpha2
+    containerPort: 443
+    conversionCRDs:
+    - nginxoperators.operator.example.com
+    deploymentName: nginx-operator-controller-manager
+    generateName: cnginxoperators.kb.io
+    sideEffects: None
+    targetPort: 9443
+    type: ConversionWebhook
+    webhookPath: /convert

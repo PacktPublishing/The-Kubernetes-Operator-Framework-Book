@@ -1,0 +1,30 @@
+domain: example.com
+layout:
+- go.kubebuilder.io/v3
+plugins:
+  manifests.sdk.operatorframework.io/v2: {}
+  scorecard.sdk.operatorframework.io/v2: {}
+projectName: nginx-operator
+repo: github.com/sample/nginx-operator
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: example.com
+  group: operator
+  kind: NginxOperator
+  path: github.com/sample/nginx-operator/api/v1alpha1
+  version: v1alpha1
+- api:
+    crdVersion: v1
+    namespaced: true
+  domain: example.com
+  group: operator
+  kind: NginxOperator
+  path: github.com/sample/nginx-operator/api/v1alpha2
+  version: v1alpha2
+  webhooks:
+    conversion: true
+    webhookVersion: v1
+version: "3"

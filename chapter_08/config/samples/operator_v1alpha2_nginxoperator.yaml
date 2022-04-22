@@ -1,0 +1,6 @@
+apiVersion: operator.example.com/v1alpha2
+kind: NginxOperator
+metadata:
+  name: nginxoperator-sample
+spec:
+  # TODO(user): Add fields here
