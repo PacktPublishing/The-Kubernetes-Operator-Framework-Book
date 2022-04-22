@@ -1,0 +1,7 @@
+apiVersion: operator.example.com/v1alpha1
+kind: NginxOperator
+metadata:
+  name: cluster
+  namespace: nginx-operator-system
+spec:
+  replicas: 1
