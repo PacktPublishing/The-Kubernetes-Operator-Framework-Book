@@ -1,0 +1,24 @@
+mode: set
+github.com/sample/nginx-operator/controllers/nginxoperator_controller.go:60.105,66.42 5 0
+github.com/sample/nginx-operator/controllers/nginxoperator_controller.go:81.2,84.42 4 0
+github.com/sample/nginx-operator/controllers/nginxoperator_controller.go:99.2,101.37 3 0
+github.com/sample/nginx-operator/controllers/nginxoperator_controller.go:104.2,104.36 1 0
+github.com/sample/nginx-operator/controllers/nginxoperator_controller.go:107.2,109.12 2 0
+github.com/sample/nginx-operator/controllers/nginxoperator_controller.go:114.2,114.16 1 0
+github.com/sample/nginx-operator/controllers/nginxoperator_controller.go:125.2,137.16 4 0
+github.com/sample/nginx-operator/controllers/nginxoperator_controller.go:141.2,144.16 2 0
+github.com/sample/nginx-operator/controllers/nginxoperator_controller.go:148.2,148.97 1 0
+github.com/sample/nginx-operator/controllers/nginxoperator_controller.go:66.42,69.3 2 0
+github.com/sample/nginx-operator/controllers/nginxoperator_controller.go:69.8,69.23 1 0
+github.com/sample/nginx-operator/controllers/nginxoperator_controller.go:69.23,79.3 3 0
+github.com/sample/nginx-operator/controllers/nginxoperator_controller.go:84.42,87.3 2 0
+github.com/sample/nginx-operator/controllers/nginxoperator_controller.go:87.8,87.23 1 0
+github.com/sample/nginx-operator/controllers/nginxoperator_controller.go:87.23,97.3 3 0
+github.com/sample/nginx-operator/controllers/nginxoperator_controller.go:101.37,103.3 1 0
+github.com/sample/nginx-operator/controllers/nginxoperator_controller.go:104.36,106.3 1 0
+github.com/sample/nginx-operator/controllers/nginxoperator_controller.go:109.12,111.3 1 0
+github.com/sample/nginx-operator/controllers/nginxoperator_controller.go:111.8,113.3 1 0
+github.com/sample/nginx-operator/controllers/nginxoperator_controller.go:114.16,123.3 2 0
+github.com/sample/nginx-operator/controllers/nginxoperator_controller.go:137.16,139.3 1 0
+github.com/sample/nginx-operator/controllers/nginxoperator_controller.go:144.16,146.3 1 0
+github.com/sample/nginx-operator/controllers/nginxoperator_controller.go:152.76,157.2 1 0
