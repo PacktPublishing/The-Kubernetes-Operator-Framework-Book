@@ -67,7 +67,7 @@ func (r *NginxOperatorReconciler) Reconcile(ctx context.Context, req ctrl.Reques
 	err = r.Get(ctx, req.NamespacedName, deployment)
 	if err != nil && errors.IsNotFound(err) {
 		create = true
-		deployment = assets.GetDeploymentFromFile("assets/nginx_deployment.yaml")
+		deployment = assets.GetDeploymentFromFile("manifests/nginx_deployment.yaml")
 	} else if err != nil {
 		logger.Error(err, "Error getting existing Nginx deployment.")
 		return ctrl.Result{}, err
