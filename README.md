@@ -64,3 +64,7 @@ Click on following link to see the Code in Action:
 ## Get to Know the Author
 **Michael Dame**
 is a software engineer who has several years of experience working with Kubernetes and Operators. He is an active contributor to the Kubernetes project, especially on the Scheduler and Descheduler projects. With a degree in Computer Science from Rensselaer Polytechnic Institute, he has worked on the Kubernetes control plane and Operators as a senior engineer at Red Hat. He is currently working with Google on Google Cloud Platform.
+### Download a free PDF
+
+ <i>If you have already purchased a print or Kindle version of this book, you can get a DRM-free PDF version at no cost.<br>Simply click on the link to claim your free PDF.</i>
+<p align="center"> <a href="https://packt.link/free-ebook/9781803232850">https://packt.link/free-ebook/9781803232850 </a> </p>
